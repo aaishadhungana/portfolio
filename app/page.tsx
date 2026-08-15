@@ -5,6 +5,8 @@ import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Medium from '@/components/Medium'
 import Branding from '@/components/Branding'
+import Contact from '@/components/Contact'
+import Newsletter from '@/components/Newsletter'
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
       <Projects />
       <Medium />
       <Branding />
+      <Contact />
+      <Newsletter />
     </main>
   )
 }
