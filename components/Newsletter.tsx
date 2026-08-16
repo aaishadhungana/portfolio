@@ -15,7 +15,7 @@ export default function Newsletter() {
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
 
-const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {    
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!isValidEmail(email)) {
@@ -27,12 +27,29 @@ const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     setStatus('submitting')
     setMessage('')
 
-    
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
 
-    setStatus('success')
-    setMessage("You're subscribed! (backend not connected yet)")
-    setEmail('')
+      const data = await res.json()
+
+      if (!res.ok) {
+        setStatus('error')
+        setMessage(data.error || 'Something went wrong. Please try again.')
+        return
+      }
+
+      setStatus('success')
+      setMessage("You're subscribed! Check your inbox soon.")
+      setEmail('')
+    } catch (err) {
+      console.error(err)
+      setStatus('error')
+      setMessage('Network error. Please try again.')
+    }
   }
 
   return (
