@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Mail, FileDown } from 'lucide-react'
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -29,10 +30,17 @@ export default function Hero() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 h-28 w-28 rounded-full bg-gradient-to-br from-primary to-accent p-1"
+        className="mb-6 h-28 w-28 overflow-hidden rounded-full bg-gradient-to-br from-primary to-accent p-1"
       >
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-surface text-3xl font-bold text-white">
-          YN
+        <div className="h-full w-full overflow-hidden rounded-full">
+          <Image
+            src="/profile.jpg"
+            alt="Aaisha Dhungana"
+            width={112}
+            height={112}
+            className="h-full w-full object-cover"
+            priority
+          />
         </div>
       </motion.div>
 
@@ -42,7 +50,7 @@ export default function Hero() {
         transition={{ duration: 0.5, delay: 0.1 }}
         className="text-4xl font-bold text-white sm:text-5xl"
       >
-        Hi, I'm Aaisha Dhungana 
+        Hi, I'm Aaisha Dhungana
       </motion.h1>
 
       <motion.p
@@ -51,7 +59,7 @@ export default function Hero() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="mt-3 max-w-xl text-lg text-white/70"
       >
-      Software Developer building clean, thoughtful software applications.
+        Software Developer building clean, thoughtful software applications.
       </motion.p>
 
       <motion.p
