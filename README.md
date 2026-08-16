@@ -22,11 +22,10 @@ npm run dev
 ```
 
 ## Environment Variables
-
 | Variable | Used for |
-|---|---|---|
+|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Database endpoint |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client key (RLS-protected) |
-| `RESEND_API_KEY`| Sending welcome emails |
+| `RESEND_API_KEY` | Sending welcome emails |
 
 
