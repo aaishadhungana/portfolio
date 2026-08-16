@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { resend } from '@/lib/resend'
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -21,7 +22,6 @@ export async function POST(request: Request) {
       .insert({ email })
 
     if (insertError) {
-      // Postgres unique constraint violation code
       if (insertError.code === '23505') {
         return NextResponse.json(
           { error: 'This email is already subscribed.' },
@@ -34,6 +34,26 @@ export async function POST(request: Request) {
         { error: 'Something went wrong. Please try again.' },
         { status: 500 }
       )
+    }
+
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: email,
+        subject: 'Welcome to the newsletter!',
+        html: `
+          <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
+            <h2>Thanks for subscribing yayyy </h2>
+            <p>
+              You're now on the list for updates on new projects,
+              articles, and things I'm learning. Glad to have you here :)
+            </p>
+          </div>
+        `,
+      })
+    } catch (emailError) {
+      console.error('Resend send error:', emailError)
+      
     }
 
     return NextResponse.json(
