@@ -2,7 +2,7 @@
 
 A production-ready full-stack portfolio built with Next.js, Tailwind CSS, Supabase, and Resend, deployed on Vercel.
 
-**Live site:** [portfolio-hazel-eight-93.vercel.app](https://portfolio-hazel-eight-93.vercel.app/)
+**Live site:** [aaisha.vercel.app](https://aaisha.vercel.app/)
 
 ## Features
 - Responsive, dark-first design with glassmorphism and animations
